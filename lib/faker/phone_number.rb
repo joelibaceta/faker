@@ -2,11 +2,19 @@ module Faker
   class PhoneNumber < Base
     class << self
       def phone_number
-        parse('phone_number.formats')
+        if parse('phone_number.formats') == ""
+          numerify(fetch('phone_number.formats'))
+        else
+          parse('phone_number.formats')
+        end
       end
 
       def cell_phone
-        parse('cell_phone.formats')
+        if parse('cell_phone.formats') == ""
+          numerify(fetch('cell_phone.formats'))
+        else
+          parse('cell_phone.formats')
+        end
       end
 
       # US only

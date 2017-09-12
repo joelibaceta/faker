@@ -10,14 +10,18 @@ module Faker
         [user_name(name), fetch('internet.free_email')].join('@')
       end
 
+      def free_email_from_name(name)
+        [user_name(name), fetch('internet.free_email')].join('@')
+      end
+
       def safe_email(name = nil)
-        [user_name(name), 'example.'+ sample(%w[org com net])].join('@')
+        [user_name(name), 'example.'+ %w[org com net].sample].join('@')
       end
 
       def user_name(specifier = nil, separators = %w(. _))
         with_locale(:en) do
           if specifier.respond_to?(:scan)
-            return specifier.scan(/\w+/).shuffle.join(sample(separators)).downcase
+            return specifier.scan(/\w+/).shuffle.join(separators.sample).downcase
           elsif specifier.kind_of?(Integer)
             # If specifier is Integer and has large value, Argument error exception is raised to overcome memory full error
             raise ArgumentError, "Given argument is too large" if specifier > 10**6
@@ -36,12 +40,12 @@ module Faker
             return result[0...specifier.max]
           end
 
-          sample([
+          [
             Char.prepare(Name.first_name),
             [Name.first_name, Name.last_name].map{ |name|
               Char.prepare(name)
-            }.join(sample(separators))
-          ])
+            }.join(separators.sample)
+          ].sample
         end
       end
 
@@ -61,8 +65,8 @@ module Faker
 
         if special_chars
           chars = %w(! @ # $ % ^ & *)
-          rand(1..min_length).times do |i|
-            temp[i] = chars[rand(chars.length)]
+          Random.rand(min_length).times do |i|
+            temp[i] = chars[Random.rand(chars.length)]
           end
         end
 
@@ -73,12 +77,13 @@ module Faker
         with_locale(:en) { [Char.prepare(domain_word), domain_suffix].join('.') }
       end
 
-      def fix_umlauts(string='')
+      def fix_umlauts(string)
         Char.fix_umlauts(string)
       end
 
       def domain_word
-        with_locale(:en) { Char.prepare(Company.name.split(' ').first) }
+        return Char.prepare(Company.name.split(' ')[1]) if Config.locale == 'uk'
+        Char.prepare(Company.name.split(' ').first)
       end
 
       def domain_suffix
@@ -92,8 +97,7 @@ module Faker
       end
 
       def ip_v4_address
-        ary = (2..254).to_a
-        [ sample(ary), sample(ary), sample(ary), sample(ary) ].join('.')
+        (1..4).map { rand(2..254) }.join('.')
       end
 
       def private_ip_v4_address
@@ -160,18 +164,12 @@ module Faker
       end
 
       def slug(words = nil, glue = nil)
-        glue ||= sample(%w[- _ .])
+        glue ||= %w[- _ .].sample
         (words || Faker::Lorem::words(2).join(' ')).gsub(' ', glue).downcase
       end
 
       def device_token
-        shuffle(rand(16 ** 64).to_s(16).rjust(64, '0').chars.to_a).join
-      end
-
-      def user_agent(vendor = nil)
-        agent_hash = translate('faker.internet.user_agent')
-        agents = vendor.respond_to?(:to_sym) && agent_hash[vendor.to_sym] || agent_hash[sample(agent_hash.keys)]
-        sample(agents)
+        rand(16 ** 64).to_s(16).rjust(64, '0').chars.to_a.shuffle.join
       end
     end
   end

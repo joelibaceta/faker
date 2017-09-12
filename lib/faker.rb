@@ -12,9 +12,9 @@ require 'set' # Fixes a bug in i18n 0.6.11
 if I18n.respond_to?(:enforce_available_locales=)
   I18n.enforce_available_locales = true
 end
+
 I18n.load_path += Dir[File.join(mydir, 'locales', '**/*.yml')]
 I18n.reload! if I18n.backend.initialized?
-
 
 module Faker
   class Config
@@ -143,10 +143,14 @@ module Faker
       # Call I18n.translate with our configured locale if no
       # locale is specified
       def translate(*args)
+
         opts = args.last.is_a?(Hash) ? args.pop : {}
         opts[:locale] ||= Faker::Config.locale
         opts[:raise] = true
+
+        I18n.locale = Faker::Config.locale
         I18n.translate(*(args.push(opts)))
+
       rescue I18n::MissingTranslationData
         opts = args.last.is_a?(Hash) ? args.pop : {}
         opts[:locale] = :en
