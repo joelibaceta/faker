@@ -1,0 +1,5 @@
+en:
+  faker:
+    mco:
+      currency:
+        acronym: "COP"

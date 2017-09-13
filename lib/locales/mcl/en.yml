@@ -1,0 +1,5 @@
+en:
+  faker:
+    mcl:
+      currency:
+        acronym: "CLP"

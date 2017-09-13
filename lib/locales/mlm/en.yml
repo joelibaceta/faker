@@ -1,0 +1,5 @@
+en:
+  faker:
+    mlm:
+      currency:
+        acronym: "MXN"

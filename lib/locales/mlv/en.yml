@@ -1,0 +1,5 @@
+en:
+  faker:
+    mlv:
+      currency:
+        acronym: "VEF"

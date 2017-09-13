@@ -20,10 +20,12 @@ module Faker
   class Config
     @locale = nil
     @random = nil
+    @site = nil
 
     class << self
       attr_writer :locale
       attr_writer :random
+      attr_writer :site
 
       def locale
         @locale || I18n.locale
@@ -31,6 +33,10 @@ module Faker
 
       def own_locale
         @locale
+      end
+
+      def site
+        @site
       end
 
       def random
