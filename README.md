@@ -25,7 +25,9 @@ Contents
   - [Faker::Address](doc/address.md)
   - [Faker::Ancient](doc/ancient.md)
   - [Faker::App](doc/app.md)
+  - [Faker::AquaTeenHungerForce](doc/aqua_teen_hunger_force.md)
   - [Faker::Avatar](doc/avatar.md)
+  - [Faker::BackToTheFuture](doc/back_to_the_future.md)
   - [Faker::Bank](doc/bank.md)
   - [Faker::Beer](doc/beer.md)
   - [Faker::Bitcoin](doc/bitcoin.md)
@@ -60,13 +62,23 @@ Contents
   - [Faker::Omniauth](doc/omniauth.md)
   - [Faker::PhoneNumber](doc/phone_number.md)
   - [Faker::Placeholdit](doc/placeholdit.md)
-  - [Faker::Pokemon](doc/pokemon.md)
+  - [Faker::Pokemon](doc/pokemon.md) 
+  - [Faker::ProgrammingLanguage](doc/programming_language.md)
+  - [Faker::RickAndMorty](doc/rick_and_morty.md)
+  - [Faker::Robin](doc/robin.md)
   - [Faker::RockBand](doc/rock_band.md)
+  - [Faker::RuPaul](doc/rupaul.md)
+  - [Faker::Science](doc/science.md)
+  - [Faker::Seinfeld](doc/seinfeld.md)
+  - [Faker::SiliconValley](doc/silicon_valley.md)
+  - [Faker::Simpsons](doc/simpsons.md) 
   - [Faker::SlackEmoji](doc/slack_emoji.md)
   - [Faker::Space](doc/space.md)
   - [Faker::StarWars](doc/star_wars.md)
   - [Faker::Superhero](doc/superhero.md)
   - [Faker::Team](doc/team.md)
+  - [Faker::TheFreshPrinceOfBelAir](doc/the_fresh_prince_of_bel_air.md)
+  - [Faker::TheThickOfIt](doc/the_thick_of_it.md) 
   - [Faker::Time](doc/time.md)
   - [Faker::TwinPeaks](doc/twin_peaks.md)
   - [Faker::Twitter](doc/twitter.md)
@@ -87,6 +99,8 @@ gem install faker
 ## Usage
 
 ```ruby
+require 'faker'
+
 Faker::Name.name      #=> "Christophe Bartell"
 
 Faker::Internet.email #=> "kirsten.greenholt@corkeryfisher.info"
