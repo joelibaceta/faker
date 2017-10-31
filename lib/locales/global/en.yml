@@ -1,0 +1,5 @@
+en:
+  faker:
+    global:
+      currency:
+        acronym: "USD"
